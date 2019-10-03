@@ -1,0 +1,21 @@
+extends noPicLayout
+
+block content
+  .container
+    .card-columns.mt-3
+      //- each meal in meals
+      .card.p-3
+        img.card-img-top.img-fluid(src="../images/chicken.jpg")
+        .card-body
+          h4.card-title meals.title
+          p.card-text meal.text
+          .card-body
+            .row
+              .col
+                nutton.btn.btn-danger.mr-2 v
+                small meal.like
+              .col
+                button.btn.btn-success.pl-4.pr-4 +
+    
+      
+    

@@ -1,0 +1,11 @@
+@import url("//fonts.googleapis.com/css?family=Lobster|Cabin:400,700");
+.loginImage {
+    background-image: url("../images/login2.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.platePicture {
+    background-image: url("../images/chicken.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
