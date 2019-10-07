@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-let dbURI = 'mongodb+srv://username:password@webapp-1wxcs.mongodb.net/admin';
+let dbURI = 'mongodb+srv://username:password@webapp-1wxcs.mongodb.net/admin?retryWrites=true&w=majority';
 // mongoose.connect(dbURI);
 
 if (process.env.NODE_ENV === 'production') {
