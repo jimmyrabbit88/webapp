@@ -3,11 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-require('./app-server/models/db');
+require('./app-api/api-models/db');
 
 var indexRouter = require('./app-server/routes/index');
 var usersRouter = require('./app-server/routes/users');
-//var routesApi = require('./app-api/api-routes/index');
+var routesApi = require('./app-api/api-routes/index');
 
 var app = express();
 
@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-//app.use('/api', routesApi);
+app.use('/api', routesApi);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
