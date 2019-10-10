@@ -4,6 +4,7 @@ if(process.env.NODE_ENV === 'production'){
     apiOptions.server = "https://boiling-castle-33038.herokuapp.com";
 }
 /* GET home page */
+//method for calling the api request and returning an object which is used to render page 
 const meals = function(req, res){ 
     var requestOptions, path;
     path = '/api/meals';
@@ -11,6 +12,10 @@ const meals = function(req, res){
         url : apiOptions.server + path,
         method : "GET",
         json : {},
+        //optional paramaters to query
+        // qs : {
+        //     offset : 20
+        // }
     }
     request(
         requestOptions,

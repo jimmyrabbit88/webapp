@@ -28,10 +28,27 @@ module.exports.oneMeal = function(req, res){
             });
     }
     else{
-        sendJsonResponse(res, 404, {"message" : "No MealId in request"})
+        sendJsonResponse(res, 404, {"message" : "No MealId in request"});
     }
     
 };
+
+module.exports.newMeal = function(req, res){
+    sendJsonResponse(res, 200, {"message" : "works"});
+}
+
+module.exports.removeMeal = function(req, res){
+    sendJsonResponse(res, 200, {"message" : "works"});
+};
+
+module.exports.oneMealIngList = function(req, res){
+    sendJsonResponse(res, 200, {"message" : "works"});
+}
+
+module.exports.like = function(req, res){
+    sendJsonResponse(res, 200, {"message" : "works"});
+}
+
 
 var sendJsonResponse = function(res, status, content){
     res.status(status);
