@@ -13,15 +13,15 @@ const meals = function(req, res){
         method : "GET",
         json : {},
         //optional paramaters to query
-        // qs : {
-        //     offset : 20
-        // }
+        qs : {
+            limit : 1
+        }
     }
     request(
         requestOptions,
         function(err, response, body) {
             res.render('meals', {
-                title: 'Meals',
+                //title : JSON.stringify(body)
                 meals : body
             });
         }
