@@ -15,19 +15,19 @@ router
 
 // get one meal from the meal Id
 // delete a meal
+// put a like to a meal
 router
     .route('/meals/:mealId')
     .get(ctrlMeals.oneMeal)
-    .delete(ctrlMeals.removeMeal);
+    .delete(ctrlMeals.removeMeal)
+    .put(ctrlMeals.like);
 
 // get the list of ingredients from a meal given its id
 router
     .route('/meals/:mealId/allIngredients')
     .get(ctrlMeals.oneMealIngList);
-// put a like to a meal
-router
-    .route('/meals/:mealID/like')
-    .put(ctrlMeals.like)
+
+
 
 //INGREDIENTS
 // get all ingredients

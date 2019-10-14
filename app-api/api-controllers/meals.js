@@ -3,11 +3,9 @@ const meal = mongoose.model('meal');
 
 //Return a list of all meals in the DB with a limit of 20
 module.exports.mealList = function(req, res){
-    //-sendJsonResponse(res, 404, req.query.limit);
     if(req.params){
-        //const listAmount = req.query.limit ? parseInt(req.query.limit) : 10
         meal
-            .find({}, null, {limit : parseInt(req.query.limit)})
+            .find({}, null, {limit : req.query.limit ? parseInt(req.query.limit) : 20})
             .exec(function(err, foundMeals){
                 if(!foundMeals){
                     sendJsonResponse(res, 404, {"message" : "no match for this request"});
@@ -25,7 +23,7 @@ module.exports.mealList = function(req, res){
     }
 };
 
-// return a meal matching the given location ID
+// return a meal matching the given meal ID
 module.exports.oneMeal = function(req, res){
     if(req.params && req.params.mealId){
         let id = req.params.mealId;
@@ -51,7 +49,6 @@ module.exports.oneMeal = function(req, res){
 
 // add a new meal to the database
 module.exports.newMeal = function(req, res){
-    //sendJsonResponse(res, 200, req.body.title);
     meal.create({
         imagePath : req.body.img,
         title : req.body.title,
@@ -66,9 +63,9 @@ module.exports.newMeal = function(req, res){
         }
     });
 }
+
 // Remove a meal from the database
 module.exports.removeMeal = function(req, res){
-    //sendJsonResponse(res, 200, {"mealId" : req.params.mealId});
     var mealId = req.params.mealId;
     if (mealId) {
         meal
@@ -78,7 +75,7 @@ module.exports.removeMeal = function(req, res){
                     sendJsonResponse(res, 404, err);
                     return;
                 }
-                sendJsonResponse(res, 204, {"ass" : "hole"});
+                sendJsonResponse(res, 204, meal);
             });
     } 
     else {
@@ -88,11 +85,10 @@ module.exports.removeMeal = function(req, res){
 
 // Return a list of all ingredients for one meal
 module.exports.oneMealIngList = function(req, res){
-    //sendJsonResponse(res, 200, {"message" : "works"});
     if(req.params && req.params.mealId){
         let id = req.params.mealId;
         meal
-            .findById(id, 'ings', function(err, foundMeal){
+            .findById(id, 'ingredients', function(err, foundMeal){
                 if(!foundMeal){
                     sendJsonResponse(res, 404, {"message" : "no match for this MealId"});
                     return;
@@ -101,17 +97,42 @@ module.exports.oneMealIngList = function(req, res){
                     sendJsonResponse(res, 404, err);
                     return;
                 }
-                sendJsonResponse(res, 200, foundMeal.ings)
+                sendJsonResponse(res, 201, foundMeal)
             });
     }
     else{
-        sendJsonResponse(res, 404, {"messagess" : "No MealId in request"});
+        sendJsonResponse(res, 404, {"messages" : "No MealId in request"});
     }
 }
 
 // Add a like to a meal
 module.exports.like = function(req, res){
-    sendJsonResponse(res, 200, {"message" : "works"});
+    if(req.params && req.params.mealId){
+        let id = req.params.mealId;
+        meal
+            .findById(id)
+            .exec(function(err, foundMeal){
+                if(!foundMeal){
+                    sendJsonResponse(res, 404, {"message" : "no match for this MealId"});
+                    return;
+                }
+                else if(err){
+                    sendJsonResponse(res, 404, err);
+                    return;
+                }
+                //Update here
+                foundMeal.like = foundMeal.like + 1;
+                foundMeal.save(function(err, worked){
+                    if(err){
+                        sendJsonResponse(res, 404, err);
+                    }
+                    sendJsonResponse(res, 200, worked)
+                })
+            });
+    }
+    else{
+        sendJsonResponse(res, 404, {"message" : "No MealId in request"});
+    }
 }
 
 
