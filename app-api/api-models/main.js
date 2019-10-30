@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
+// Ingredient will have a name and type which is reference to it known measurement eg. cup, kg etc
 const ingSchema = new mongoose.Schema({
     name: {
         type: String,
     },
-    amount: Number,
     type: String
  });
 
@@ -16,7 +16,10 @@ const mealSchema = new mongoose.Schema({
     },
     text: String,
     like: {type: Number, 'default': 0},
-    ingredients: [ingSchema]
+    ingredients: [{
+        amount: Number,
+        ingredient: ingSchema
+    }]
  });
 
  const dinnersSchema = new mongoose.Schema({
@@ -24,12 +27,23 @@ const mealSchema = new mongoose.Schema({
  });
 
  const shoppingListSchema = new mongoose.Schema({
-     list: [ingSchema]
+     list: [{
+        amount: Number,
+        ingredient: ingSchema
+    }]
  });
+
+ const userSchema = new mongoose.Schema({
+     name: String,
+     email: String,
+     username: String,
+     password: String
+ })
 
  mongoose.model('ingredient', ingSchema);
  mongoose.model('meal', mealSchema);
  mongoose.model('dinners', dinnersSchema);
  mongoose.model('shoppingList', shoppingListSchema);
+ mongoose.model('user', userSchema);
 
  

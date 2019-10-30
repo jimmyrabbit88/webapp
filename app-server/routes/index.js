@@ -8,7 +8,10 @@ router.get('/meals', ctrlMain.meals);
 router.get('/shopping', ctrlMain.shopping);
 
 router.get('/', ctrlLogin.index);
-router.get('/register', ctrlLogin.register);
+router
+    .route('/register')
+    .get(ctrlLogin.register)
+    .post(ctrlLogin.addit)
 
 
 
