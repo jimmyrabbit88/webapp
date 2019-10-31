@@ -1,21 +1,37 @@
 const mongoose = require('mongoose');
 const user = mongoose.model('user');
 
+//add a new user, this checkes if username is already in user
 module.exports.newUser = function(req, res){
-    user.create({
-        name : req.body.name,
-        email : req.body.email,
-        username : req.body.username,
-        password : req.body.password,
-    }, 
-    function(err, user) {
-        if (err) {
-            sendJsonResponse(res, 400, err);
-        }
-        else {
-            sendJsonResponse(res, 201, user);
-        }
-    });
+    user
+        .find({'username' : req.body.username}, null , {limit : 1})
+            .exec(function(err, foundUser){
+                if(!foundUser.length){
+                    user.create({
+                        name : req.body.name,
+                        email : req.body.email,
+                        username : req.body.username,
+                        password : req.body.password,
+                    }, 
+                    function(err, user) {
+                        if (err) {
+                            sendJsonResponse(res, 409, err);
+                        }
+                        else {
+                            sendJsonResponse(res, 200, user);
+                            
+                        }
+                    });
+                }
+                else if(err){
+                    sendJsonResponse(res, 405, err);
+                    return;
+                }
+                else{
+                    sendJsonResponse(res, 701, {"details": "this username is already in use"});
+                }
+            });
+    
 }
 
 // find a user by Id
@@ -41,6 +57,7 @@ module.exports.oneUser = function(req, res){
     }
     
 };
+
 
 //search username
 module.exports.searchUsername = function(req, res){

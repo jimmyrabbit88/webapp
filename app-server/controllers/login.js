@@ -1,3 +1,4 @@
+const main = require('../controllers/main');
 var request = require('request');
 var apiOptions = { server : "http://localhost:3000" };
 if(process.env.NODE_ENV === 'production'){
@@ -13,7 +14,6 @@ const register = function(req, res){
 //
 const addit = function(req, res){ 
     var requestOptions, path;
-    if(!checkUsername(req.body.username)){
         path = '/api/users';
         requestOptions = {
             url : apiOptions.server + path,
@@ -28,15 +28,17 @@ const addit = function(req, res){
         request(
             requestOptions,
             function(err, response, body) {
-                sendJsonResponse(res, 309, body);
+                if(response.statusCode == 200){
+                    console.log('user added');
+                    main.meals(req, res);
+                    
+                }
+                else{
+                    console.log('user failed to add');
+                    register(req, res);
+                }
             }
-        ) 
-    }
-    else{
-        sendJsonResponse(res, 301, {"a": "already exists"})
-    }
-    
-    
+        )
 };
 //
 
@@ -85,5 +87,9 @@ var sendJsonResponse = function(res, status, content){
     res.status(status);
     res.json(content);
 };
+
+const addLike = function(){
+    console.log('addLike');
+}
 
     module.exports = { register, addit, index };
