@@ -42,37 +42,30 @@ const addit = function(req, res){
 };
 //
 
-// check if a username is already in use return true if username is in use
-const checkUsername = function(username){
-    //return false;
+const login = function(req, res){
+    console.log(req.body.username);
     var requestOptions, path;
-    var check = true;
-    path = '/api/users'
-    requestOptions = {
-        url : apiOptions.server + path,
-        method: "GET",
-        json: {},
-        qs : {
-            username : username
-        }
-    }
-    
-    
-     request(
-         requestOptions,
-         function(err, response, body){
-             // Status code 203 = no match for this username
-            if (response.statusCode == 203){
-                console.log('a');
-                let check = false;
-                
-            }
-            else{
-                console.log('b');
-                //let check = true;
+        path = '/api/users';
+        requestOptions = {
+            url : apiOptions.server + path,
+            method : "GET",
+            json : {},
+            qs : {
+                username : req.body.username
             }
         }
-    )
+        request(
+            requestOptions,
+            function(err,response,body){
+                if(response.statusCode == 200){
+                    main.meals(req, res);
+                }
+                else if (response.statusCode == 203){
+                    console.log('register');
+                }
+            
+            }
+        )
 }
 
 
@@ -92,4 +85,4 @@ const addLike = function(){
     console.log('addLike');
 }
 
-    module.exports = { register, addit, index };
+    module.exports = { register, addit, index, login };

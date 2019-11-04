@@ -61,6 +61,7 @@ module.exports.oneUser = function(req, res){
 
 //search username
 module.exports.searchUsername = function(req, res){
+    console.log(req.query.username);
     if(req.params){
         user
             .find({'username' : req.query.username}, null , {limit : 1})

@@ -14,7 +14,6 @@ const meals = function(req, res){
         json : {},
         //optional paramaters to query
         qs : {
-            limit : 1
         }
     }
     request(
