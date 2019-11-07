@@ -14,7 +14,8 @@ block content
             .card-body
               .row
                 .col
-                  button.btn.btn-danger.mr-2 v
+                  a.btn.btn-danger.mr-2(href=`../api/meals/${meal._id}`) v
+
                   small=meal.like
                 .col
                   button.btn.btn-success.pl-4.pr-4 +

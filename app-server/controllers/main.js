@@ -19,13 +19,43 @@ const meals = function(req, res){
     request(
         requestOptions,
         function(err, response, body) {
-            res.render('meals', {
-                //title : JSON.stringify(body)
-                meals : body
-            });
+            _renderMeals(req, res, body);
         }
-    ) 
+    )
+        
+     
 };
+
+const addLike = function(req, res){
+    var requestOptions, path;
+    console.log(req.params);
+    path = '/api/meals/daadsasggfg';
+    requestOptions = {
+        url : apiOptions.server + path,
+        method : "GET",
+        json : {},
+        //optional paramaters to query
+        qs : {
+        }
+    }
+    request(
+        requestOptions,
+        function(err, response, body) {
+            _renderMeals(req, res, body);
+        }
+    )
+}
+
+const _renderMeals = function(req, res, content){
+    let message = null;
+    if(!content.length){
+        message = "No Meals Found"
+    }
+    res.render('meals', {
+        meals : content,
+        message : message
+    })
+}
 
 const shopping = function(req, res){ 
     res.render('shopping', { 
@@ -33,5 +63,5 @@ const shopping = function(req, res){
     }); 
 };
 
-    module.exports = { meals, shopping };
+    module.exports = { meals, shopping, addLike };
     

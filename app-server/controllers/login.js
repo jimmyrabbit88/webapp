@@ -6,7 +6,6 @@ if(process.env.NODE_ENV === 'production'){
 }
 
 
-
 const register = function(req, res){ 
     res.render('register', { title: 'Register' }); 
 };

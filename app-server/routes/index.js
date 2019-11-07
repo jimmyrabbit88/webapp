@@ -8,6 +8,10 @@ router.get('/meals', ctrlMain.meals);
 router.get('/shopping', ctrlMain.shopping);
 
 router
+    .route('/meals/addLike')
+    .get(ctrlMain.addLike)
+
+router
     .route('/')
     .get(ctrlLogin.index)
     .post(ctrlLogin.login)
