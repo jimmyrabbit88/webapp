@@ -6,6 +6,7 @@ if(process.env.NODE_ENV === 'production'){
 /* GET home page */
 //method for calling the api request and returning an object which is used to render page 
 const meals = function(req, res){ 
+    console.log("just go in here");
     var requestOptions, path;
     path = '/api/meals';
     requestOptions = {
@@ -28,11 +29,12 @@ const meals = function(req, res){
 
 const addLike = function(req, res){
     var requestOptions, path;
-    console.log(req.params);
-    path = '/api/meals/daadsasggfg';
+    console.log(req);
+
+    path = '/api/meals/' + req.params.mealId;
     requestOptions = {
         url : apiOptions.server + path,
-        method : "GET",
+        method : "PUT",
         json : {},
         //optional paramaters to query
         qs : {
@@ -41,7 +43,7 @@ const addLike = function(req, res){
     request(
         requestOptions,
         function(err, response, body) {
-            _renderMeals(req, res, body);
+            res.redirect('/meals')
         }
     )
 }

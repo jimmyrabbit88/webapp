@@ -57,7 +57,7 @@ const login = function(req, res){
             requestOptions,
             function(err,response,body){
                 if(response.statusCode == 200){
-                    main.meals(req, res);
+                    res.redirect('/meals');
                 }
                 else if (response.statusCode == 203){
                     console.log('register');

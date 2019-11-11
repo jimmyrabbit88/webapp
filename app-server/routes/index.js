@@ -8,7 +8,7 @@ router.get('/meals', ctrlMain.meals);
 router.get('/shopping', ctrlMain.shopping);
 
 router
-    .route('/meals/addLike')
+    .route('/meals/addLike/:mealId')
     .get(ctrlMain.addLike)
 
 router
