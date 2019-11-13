@@ -3,6 +3,7 @@ const router = express.Router();
 const ctrlMeals = require('../api-controllers/meals');
 const ctrlIng = require('../api-controllers/ingredients');
 const ctrlUser = require('../api-controllers/users');
+const ctrlDinners = require('../api-controllers/dinnerList');
 
 //meals functions
 
@@ -56,6 +57,11 @@ router
 // get all items on the list
 // add a meal to the list
 // remove a meal from the list
+router
+    .route('/dinners/:userId')
+    //.get(ctrlDinners.allDinners)
+    .post(ctrlDinners.new)
+    .put(ctrlDinners.addMeal)
 // search for a meal from the list
 
 //SHOPPING LIST

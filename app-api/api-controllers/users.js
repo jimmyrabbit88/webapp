@@ -19,7 +19,6 @@ module.exports.newUser = function(req, res){
                         }
                         else {
                             sendJsonResponse(res, 200, user);
-                            
                         }
                     });
                 }

@@ -23,11 +23,13 @@ const mealSchema = new mongoose.Schema({
  });
 
  const dinnersSchema = new mongoose.Schema({
-     list: [mealSchema]
+    userId: String, 
+    list: [mealSchema]
  });
 
  const shoppingListSchema = new mongoose.Schema({
-     list: [{
+    userId: String, 
+    list: [{
         amount: Number,
         ingredient: ingSchema
     }]
