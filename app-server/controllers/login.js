@@ -57,6 +57,8 @@ const login = function(req, res){
             requestOptions,
             function(err,response,body){
                 if(response.statusCode == 200){
+                    console.log(req);
+                    $localStorage.setItem(userId, body._id)
                     res.redirect('/meals');
                 }
                 else if (response.statusCode == 203){

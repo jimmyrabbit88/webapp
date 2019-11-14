@@ -24,29 +24,29 @@ module.exports.addMeal = function(req, res){
         dinners
             .find({'userId' : id}, null)
             .exec(function(err, foundDinners){
-                console.log(foundDinners)
-                sendJsonResponse(res, 300, foundDinners);
-                // if(!foundMeal){
-                //     sendJsonResponse(res, 404, {"message" : "no match for this MealId"});
-                //     return;
-                // }
+                //console.log(foundDinners)
+                //sendJsonResponse(res, 300, foundDinners);
+                if(!foundMeal){
+                    sendJsonResponse(res, 404, {"message" : "no match for this MealId"});
+                    return;
+                }
                 // else if(err){
                 //     sendJsonResponse(res, 404, err);
                 //     return;
                 // }
-                // //Update here
-                // foundMeal.like = foundMeal.like + 1;
-                // foundMeal.save(function(err, worked){
-                //     if(err){
-                //         sendJsonResponse(res, 404, err);
-                //     }
-                //     sendJsonResponse(res, 200, worked)
-                // })
+                //Update here
+                else {
+                    doAddMeal(req,res,foundDinners)
+                }
             });
     }
     else{
         sendJsonResponse(res, 404, {"message" : "No MealId in request"});
     }
+}
+
+var doAddMeal = function(req, res, foundDinners){
+    
 }
 
 

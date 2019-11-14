@@ -48,6 +48,27 @@ const addLike = function(req, res){
     )
 }
 
+const addToList = function(req, res){
+    var requestOptions, path;
+    console.log(req);
+
+    path = '/api/dinners/'
+    requestOptions = {
+        url : apiOptions.server + path,
+        method : "PUT",
+        json : {},
+        //optional paramaters to query
+        qs : {
+        }
+    }
+    request(
+        requestOptions,
+        function(err, response, body) {
+            res.redirect('/meals')
+        }
+    )
+}
+
 const _renderMeals = function(req, res, content){
     let message = null;
     if(!content.length){
@@ -65,5 +86,5 @@ const shopping = function(req, res){
     }); 
 };
 
-    module.exports = { meals, shopping, addLike };
+    module.exports = { meals, shopping, addLike, addToList };
     

@@ -11,6 +11,8 @@ router
     .route('/meals/addLike/:mealId')
     .get(ctrlMain.addLike)
 
+router.get('/meals/addToList/:mealId', ctrlMain.addToList)
+
 router
     .route('/')
     .get(ctrlLogin.index)
