@@ -46,6 +46,7 @@ const mealSchema = new mongoose.Schema({
     })
 
     userSchema.methods.setPassword = function(password){
+        console.log(3);
         this.salt = crypto.randomBytes(16).toString('hex');
         this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
     }
@@ -64,7 +65,7 @@ const mealSchema = new mongoose.Schema({
             email: this.email,
             username: this.username,
             exp: parseInt(expiry.getTime() / 1000)
-        }, 'thisisasecret');
+        }, process.env.JWT_SECRET);
     }
 
  mongoose.model('ingredient', ingSchema);

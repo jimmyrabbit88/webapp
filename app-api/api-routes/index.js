@@ -4,6 +4,7 @@ const ctrlMeals = require('../api-controllers/meals');
 const ctrlIng = require('../api-controllers/ingredients');
 const ctrlUser = require('../api-controllers/users');
 const ctrlDinners = require('../api-controllers/dinnerList');
+const ctrlAuth = require('../api-controllers/authentication');
 
 //meals functions
 
@@ -73,17 +74,18 @@ router
 
 //USERS
 // add a user
-router
-    .route('/users')
-    .post(ctrlUser.newUser)
-    .get(ctrlUser.searchUsername)
+// router
+//     .route('/users')
+//     .post(ctrlUser.newUser)
+//     .get(ctrlUser.searchUsername)
 // get a user
 // update a user
-router
-    .route('/user/:userId')
-    .get(ctrlUser.oneUser)
+// router
+//     .route('/user/:userId')
+//     .get(ctrlUser.oneUser)
 
-
+router.post('/register', ctrlAuth.register);
+router.post('/login', ctrlAuth.login);
 
 
 
