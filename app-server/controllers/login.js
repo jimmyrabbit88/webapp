@@ -10,10 +10,10 @@ const register = function(req, res){
     res.render('register', { title: 'Register' }); 
 };
 
-//
-const addit = function(req, res){ 
+//Link to call the api method to Register a new user, also calls the init mealList and init shopList methods
+const addUser = function(req, res){ 
     var requestOptions, path;
-        path = '/api/users';
+        path = '/api/register';
         requestOptions = {
             url : apiOptions.server + path,
             method : "POST",
@@ -28,8 +28,9 @@ const addit = function(req, res){
             requestOptions,
             function(err, response, body) {
                 if(response.statusCode == 200){
-                    console.log('user added');
-                    main.meals(req, res);
+                    //_initaliseMealList(req, res);
+                    _initaliseShoppingList(req, res);
+                    res.redirect('meals/?usr='+req.body.username);
                     
                 }
                 else{
@@ -41,28 +42,74 @@ const addit = function(req, res){
 };
 //
 
-const login = function(req, res){
-    console.log(req.body.username);
+const _initaliseMealList = function(req, res){
     var requestOptions, path;
-        path = '/api/users';
+    path = '/api/initMealList';
+    requestOptions = {
+        url : apiOptions.server + path,
+        method : "POST",
+        json : {
+            username : req.body.username
+        }
+    }
+    request(
+        requestOptions,
+        function(err, response, body){
+            if(err){
+                console.log('problem initaliseing the list')
+            }
+        }
+    )
+}
+
+// Init the shopping list
+const _initaliseShoppingList = function(req, res){
+    console.log('AAAA')
+    var requestOptions, path;
+    path = '/api/initShopList';
+    requestOptions = {
+        url : apiOptions.server + path,
+        method : "POST",
+        json : {
+            username : req.body.username
+        }
+    }
+    request(
+        requestOptions,
+        function(err, response, body){
+            console.log('CCCC')
+            if(err){
+                console.log('problem initaliseing the list')
+            }
+        }
+    )
+}
+
+const login = function(req, res){
+    console.log('AAA');
+    var requestOptions, path;
+        path = '/api/login';
         requestOptions = {
             url : apiOptions.server + path,
-            method : "GET",
+            method : "POST",
             json : {},
             qs : {
-                username : req.body.username
+                username : req.body.username,
+                password : req.body.password
             }
         }
         request(
             requestOptions,
             function(err,response,body){
                 if(response.statusCode == 200){
-                    console.log(req);
-                    $localStorage.setItem(userId, body._id)
+                    
+                    //$localStorage.setItem(userId, body._id)
                     res.redirect('/meals');
                 }
-                else if (response.statusCode == 203){
-                    console.log('register');
+                else{
+                    console.log('EEE');
+                    res.redirect('/');
+                
                 }
             
             }
@@ -86,4 +133,4 @@ const addLike = function(){
     console.log('addLike');
 }
 
-    module.exports = { register, addit, index, login };
+    module.exports = { register, addUser, index, login };

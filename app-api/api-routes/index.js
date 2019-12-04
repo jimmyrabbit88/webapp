@@ -4,6 +4,7 @@ const ctrlMeals = require('../api-controllers/meals');
 const ctrlIng = require('../api-controllers/ingredients');
 const ctrlUser = require('../api-controllers/users');
 const ctrlDinners = require('../api-controllers/dinnerList');
+const ctrlShop = require('../api-controllers/shoppingList')
 const ctrlAuth = require('../api-controllers/authentication');
 
 //meals functions
@@ -58,19 +59,22 @@ router
 // get all items on the list
 // add a meal to the list
 // remove a meal from the list
-router
-    .route('/dinners/:userId')
+//router
+    //.route('/dinners/:userId')
     //.get(ctrlDinners.allDinners)
-    .post(ctrlDinners.new)
-    .put(ctrlDinners.addMeal)
+    //.post(ctrlDinners.new)
+    //.put(ctrlDinners.addMeal)
 // search for a meal from the list
 
 //SHOPPING LIST
-
+//init
+router.post('/initShopList', ctrlShop.initShopList);
 // get all items on the list
+router.get('/getItems', ctrlShop.getItems);
 // add an item to the list 
+router.put('/shopping', ctrlShop.addMeal);
 // update item on the list
-// remove an item from the list
+// remove all item from the list
 
 //USERS
 // add a user
@@ -84,8 +88,14 @@ router
 //     .route('/user/:userId')
 //     .get(ctrlUser.oneUser)
 
+// Authentication methods for register and login
 router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
+
+// Link to initalise meal list
+router.post('/initMealList', ctrlDinners.initMealList)
+// link to add a meal to the meallist
+router.put('/mealList', ctrlDinners.addMeal)
 
 
 

@@ -3,8 +3,9 @@ extends noPicLayout
 
 block content
   .container
-    //-.p.text-white=title +"jasons"
+    .h3.text-white=title
     .card-columns.mt-3
+
       each meal in meals
         .card.p-3
           img.card-img-top.img-fluid(src=meal.imagePath)
@@ -18,6 +19,6 @@ block content
 
                   small=meal.like
                 .col
-                  button.btn.btn-success.pl-4.pr-4(href=`../meals/addToList/${meal._id}`) +
+                  a.btn.btn-success.pl-4.pr-4(href=`../meals/addToShopList/${meal.title}`) +
       
     

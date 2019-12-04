@@ -1,19 +1,19 @@
 var passport = require('passport');
 var mongoose = require('mongoose');
-var user = mongoose.model('user');
+var User = mongoose.model('user');
 
 module.exports.register = function(req, res){
     //sendJsonResponse(res, 400, { "message": "all fields required" });
-    console.log("in");
+    //console.log("in");
     if(!req.body.name || !req.body.email || !req.body.username || !req.body.password) {
         sendJsonResponse(res, 400, {
             "message": "all fields required"
             
         });
-        console.log("a");
+        //console.log("a");
         return;
     }
-    console.log(2);
+    //console.log(2);
 
     var user = new User();
 
@@ -25,13 +25,13 @@ module.exports.register = function(req, res){
     user.save(function(err){
         var token;
         if(err){
-            console.log("b");
+            //console.log("b");
             sendJsonResponse(res, 404, err);
             
         }
         else{
             token = user.generateJwt();
-            console.log("c");
+            //console.log("c");
             sendJsonResponse(res, 200, {
                 "token": token
             });
@@ -40,8 +40,9 @@ module.exports.register = function(req, res){
 }
 
 module.exports.login = function(req, res){
-    //sendJsonResponse(res, 400, { "message": "all fields required" });
-    if(!req.body.username || !req.body.password){
+    console.log('BBB');
+    //console.log(req.query);
+    if(!req.query.username || !req.query.password){
         sendJsonResponse(res, 400, { "message": "All fields required"});
         return;
     }
@@ -50,10 +51,11 @@ module.exports.login = function(req, res){
         var token;
 
         if(err){
-            sendJsonResponse(res, 400, err);
+            sendJsonResponse(res, 402, err);
             return;
         }
         if(user){
+            console.log('CCC');
             token = user.generateJwt();
             sendJsonResponse(res, 200, { "token": token });
         }

@@ -11,7 +11,7 @@ router
     .route('/meals/addLike/:mealId')
     .get(ctrlMain.addLike)
 
-router.get('/meals/addToList/:mealId', ctrlMain.addToList)
+router.get('/meals/addToShopList/:mealTitle', ctrlMain.addToList)
 
 router
     .route('/')
@@ -20,7 +20,7 @@ router
 router
     .route('/register')
     .get(ctrlLogin.register)
-    .post(ctrlLogin.addit)
+    .post(ctrlLogin.addUser)
 
 
 

@@ -25,16 +25,13 @@ const mealSchema = new mongoose.Schema({
  });
 
  const dinnersSchema = new mongoose.Schema({
-    userId: String, 
+    username: String,
     list: [mealSchema]
  });
 
  const shoppingListSchema = new mongoose.Schema({
-    userId: String, 
-    list: [{
-        amount: Number,
-        ingredient: ingSchema
-    }]
+    username: String,
+    list: [String]
  });
 
  const userSchema = new mongoose.Schema({
@@ -48,11 +45,11 @@ const mealSchema = new mongoose.Schema({
     userSchema.methods.setPassword = function(password){
         console.log(3);
         this.salt = crypto.randomBytes(16).toString('hex');
-        this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+        this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha1').toString('hex');
     }
 
     userSchema.methods.validPassword = function(password){
-        var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+        var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha1').toString('hex');
         return this.hash === hash
     }
 
@@ -71,7 +68,7 @@ const mealSchema = new mongoose.Schema({
  mongoose.model('ingredient', ingSchema);
  mongoose.model('meal', mealSchema);
  mongoose.model('dinners', dinnersSchema);
- mongoose.model('shoppingList', shoppingListSchema);
+ mongoose.model('shopping', shoppingListSchema);
  mongoose.model('user', userSchema);
 
  

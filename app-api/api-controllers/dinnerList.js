@@ -2,29 +2,17 @@ const mongoose = require('mongoose');
 const dinners = mongoose.model('dinners');
 
 //add a new dinnerList
-module.exports.new = function(req, res){
-    dinners.create({
-        userId : req.params.userId,
-    }, 
-    function(err, meal) {
-        if (err) {
-            sendJsonResponse(res, 400, err);
-        }
-        else {
-            sendJsonResponse(res, 201, meal);
-        }
-    });
-}
+
 
 // add a meal to the dinners list
 module.exports.addMeal = function(req, res){
-    if(req.params && req.params.userId){
-        let id = req.params.userId;
+    if(req.params && req.params.username){
+        let username = req.params.username;
         console.log(id);
         dinners
-            .find({'userId' : id}, null)
+            .find({'username' : username}, null)
             .exec(function(err, foundDinners){
-                //console.log(foundDinners)
+                console.log('BB')
                 //sendJsonResponse(res, 300, foundDinners);
                 if(!foundMeal){
                     sendJsonResponse(res, 404, {"message" : "no match for this MealId"});
@@ -47,6 +35,20 @@ module.exports.addMeal = function(req, res){
 
 var doAddMeal = function(req, res, foundDinners){
     
+}
+
+module.exports.initMealList = function(req, res){
+    dinners.create({
+        username : req.body.username
+    },
+    function(err, list) {
+        if (err) {
+            sendJsonResponse(res, 400, err);
+        }
+        else {
+            sendJsonResponse(res, 201, list);
+        }
+    });
 }
 
 
