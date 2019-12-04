@@ -7,25 +7,28 @@ block content
       .col-5.bg-light
         .card.bg-light.text-dark.mt-2.mb-2.align-right
           .card-header.display-4 Sign Up
-          .card-body  
-            .form-group.mr-0.ml-auto
-              label.ml-3.mt-3(for="name") Full Name
-              input.form-control.form-control-lg.bg-light.border-top-0.border-left-0.border-right-0.border-primary(placeholder="Name..",id="name")
-              label.ml-3.mt-3(for="email") Email
-              input.form-control.form-control-lg.bg-light.border-top-0.border-left-0.border-right-0.border-primary(placeholder="Email Address..",id="email")
-              label.ml-3.mt-3(for="username") Username
-              input.form-control.form-control-lg.bg-light.border-top-0.border-left-0.border-right-0.border-primary(placeholder="Username..",id="username")
-              label.ml-3.mt-3(for="email") Password
-              input.form-control.form-control-lg.bg-light.border-top-0.border-left-0.border-right-0.border-primary(type="password")
-              label.ml-3.mt-3(for="email") Confirm Password
-              input.form-control.form-control-lg.bg-light.border-top-0.border-left-0.border-right-0.border-primary(type="password")
-              .form-check.mt-3 
-                .form-check-label.mr-2
-                  input.form-check-input(type="checkbox")
-                  small.form-text.text-muted I have read and accepted the terms and conditions
-              .row
-                .col-5
-                  button.btn.btn-outline-primary.mt-3.w-100(type="button") Submit
-                .col
-                  p Already registered 
-                    a(href="#") login here
+          .card-body
+            form(action="/register", method="post") 
+              .form-group.mr-0.ml-auto
+                label.ml-3.mt-3(for="name") Full Name
+                input.form-control.form-control-lg.bg-light.border-top-0.border-left-0.border-right-0.border-primary(placeholder="Name..",id="name" name="name")
+                label.ml-3.mt-3(for="email") Email
+                input.form-control.form-control-lg.bg-light.border-top-0.border-left-0.border-right-0.border-primary(placeholder="Email Address..",id="email" name="email")
+                label.ml-3.mt-3(for="username") Username
+                input.form-control.form-control-lg.bg-light.border-top-0.border-left-0.border-right-0.border-primary(placeholder="Username..",id="username" name="username")
+                label.ml-3.mt-3(for="email") Password
+                input.form-control.form-control-lg.bg-light.border-top-0.border-left-0.border-right-0.border-primary(type="password")
+                label.ml-3.mt-3(for="email") Confirm Password
+                input.form-control.form-control-lg.bg-light.border-top-0.border-left-0.border-right-0.border-primary(type="password" name="password")
+                .form-check.mt-3 
+                  .form-check-label.mr-2
+                    input.form-check-input(type="checkbox")
+                    small.form-text.text-muted I have read and accepted the terms and conditions
+                .row
+                  .col-5
+                    button.btn.btn-outline-primary.mt-3.w-100(type="submit") Submit
+                  .col
+                    p Already registered 
+                      a(href="#") login here
+
+

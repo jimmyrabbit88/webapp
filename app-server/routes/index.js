@@ -7,8 +7,20 @@ const ctrlMain = require('../controllers/main');
 router.get('/meals', ctrlMain.meals);
 router.get('/shopping', ctrlMain.shopping);
 
-router.get('/', ctrlLogin.index);
-router.get('/register', ctrlLogin.register);
+router
+    .route('/meals/addLike/:mealId')
+    .get(ctrlMain.addLike)
+
+router.get('/meals/addToShopList/:mealTitle', ctrlMain.addToList)
+
+router
+    .route('/')
+    .get(ctrlLogin.index)
+    .post(ctrlLogin.login)
+router
+    .route('/register')
+    .get(ctrlLogin.register)
+    .post(ctrlLogin.addUser)
 
 
 

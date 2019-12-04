@@ -2,33 +2,20 @@ extends noPicLayout
 
 block content
   .container 
+
     h1.text-white.display-3 My Shopping List
     .row
       .col-6.bg-light
-        table.table.table-borderless.table-hover
-          thead
-            tr
-              th Amount
-              th Amount Type
-              th Item
-              th Price
-              th
-          tbody
-            each ing in ingredient
-              tr
-                th 
-                  p=ing.number
-                th=ing.amountType
-                th=ing.name
-                th=ing.price
-                th 
-                  button.btn.btn-warning -
+        for l in list[0].list
+          .card.p-3
+            .card-body
+              h4.card-title=l
       .col
         .container
           .row
             .col-8.offset-2
               button.btn.btn-outline-success.w-75.mr-auto.ml-auto Add Item
-              button.btn.btn-danger.w-75 Clear List
+              a.btn.btn-danger.w-75(href='#') Clear List
 
 
 

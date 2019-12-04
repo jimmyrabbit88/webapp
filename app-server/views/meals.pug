@@ -1,21 +1,24 @@
+
 extends noPicLayout
 
 block content
   .container
+    .h3.text-white=title
     .card-columns.mt-3
-      //- each meal in meals
-      .card.p-3
-        img.card-img-top.img-fluid(src="../images/chicken.jpg")
-        .card-body
-          h4.card-title meals.title
-          p.card-text meal.text
+
+      each meal in meals
+        .card.p-3
+          img.card-img-top.img-fluid(src=meal.imagePath)
           .card-body
-            .row
-              .col
-                nutton.btn.btn-danger.mr-2 v
-                small meal.like
-              .col
-                button.btn.btn-success.pl-4.pr-4 +
-    
+            h4.card-title=meal.title
+            p.card-text=meal.text
+            .card-body
+              .row
+                .col
+                  a.btn.btn-danger.mr-2(href=`../meals/addLike/${meal._id}`) v
+
+                  small=meal.like
+                .col
+                  a.btn.btn-success.pl-4.pr-4(href=`../meals/addToShopList/${meal.title}`) +
       
     
